@@ -4,8 +4,8 @@ def is_palindrome(n):
     # If length is not even it is not a palindrome
     if len(n) % 2 != 0: return False
 
-    # Check if reversed half of number is equal to first half of number
-    return n[-1:int(len(n)/2)-1:-1] == n[0:int(len(n)/2)]
+    # Check if reversed number is equal to number
+    return n == n[::-1]
 
 
 if __name__ == '__main__':
