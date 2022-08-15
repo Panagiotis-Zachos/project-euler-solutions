@@ -1,3 +1,5 @@
+from collections import Counter
+from time import time
 import random
 
 def powerOfTwo(n):
@@ -57,17 +59,27 @@ def get_prime_factors(num):
 
     current_check = 2
 
-    while not(miller_rabin(num, 7)):
-        while not (num/current_check).is_integer():
+    while not(miller_rabin(num, 7)) and num != 1:
+        while not (num/current_check).is_integer() and num != 1:
             current_check += 1
-
+            
         prime_factors.append(current_check)
         num = int(num / current_check)
-
     if miller_rabin(num, 7): prime_factors.append(num)
 
     return prime_factors
 
+
+def prime_factor_multiplicity(num):
+    prime_factors = get_prime_factors(num)
+    for (k,v) in Counter(prime_factors).items():
+        yield (k,v)
+
 if __name__ == '__main__':
-    num = 128314298301230219287319203812302123111114123245124354123124412341234342353464350000000
-    print(get_prime_factors(num))
+    num = 2893751023948627304498257532342
+    t0 = time()
+    # print((get_prime_factors(num)))
+    prime_factors = get_prime_factors(num)
+    for (k,v) in prime_factor_multiplicity(num):
+        print(k,v)
+    print(time() - t0)
