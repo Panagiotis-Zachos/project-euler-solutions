@@ -77,7 +77,10 @@ def prime_factor_multiplicity(num):
         yield (k,v)
 
 
-def divisorGen(n):
+def divisor_gen(n):
+    """
+    Generator of perfect divisors of n
+    """
     factors = list(prime_factor_multiplicity(n))
     nfactors = len(factors)
 
