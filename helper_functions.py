@@ -1,4 +1,5 @@
 from collections import Counter
+from functools import reduce
 from time import time
 import random
 
@@ -74,6 +75,25 @@ def prime_factor_multiplicity(num):
     prime_factors = get_prime_factors(num)
     for (k,v) in Counter(prime_factors).items():
         yield (k,v)
+
+
+def divisorGen(n):
+    factors = list(prime_factor_multiplicity(n))
+    nfactors = len(factors)
+
+    f = [0] * nfactors
+    while True:
+        yield reduce(lambda x, y: x*y, [factors[x][0]**f[x] for x in range(nfactors)], 1)
+        i = 0
+        while True:
+            f[i] += 1
+            if f[i] <= factors[i][1]:
+                break
+            f[i] = 0
+            i += 1
+            if i >= nfactors:
+                return
+
 
 if __name__ == '__main__':
     num = 2893751023948627304498257532342
