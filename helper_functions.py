@@ -1,7 +1,13 @@
 from collections import Counter
 from functools import reduce
+from math import sqrt
 from time import time
 import random
+
+PHI = (1 + 5 ** 0.5) / 2
+
+def approx_fib(n):
+    return PHI**n/sqrt(5)
 
 def powerOfTwo(n):
     """
